@@ -1,7 +1,6 @@
 version: 2.1
 
 orbs:
-#  node: 'circleci/node:4.1'
   slack: circleci/slack@4.1
 
 commands:
@@ -85,7 +84,7 @@ jobs:
       - slack/notify:
           channel: C03S7GPBQ5T
           event: pass
-          template: success_tagged_deploy_1
+          template: basic_success_1
 
   test-frontend:
     docker:
