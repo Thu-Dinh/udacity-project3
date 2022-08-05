@@ -197,10 +197,10 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            sudo apt-get update
-            sudo apt-get -y install yum
+            apt-get update
+            apt-get -y install yum
             yum -y install tar gzip
-            sudo apt-get install awscli -y
+            apt-get install awscli -y
             apk add --update ansible
       - run:
           name: Configure server
