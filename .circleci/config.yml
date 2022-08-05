@@ -249,3 +249,5 @@ workflows:
           filters:
             branches:
               only: [develop]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
