@@ -1,38 +1,19 @@
-- name: "upgrade packages."
-  become: true
-  apt:
-    upgrade: "yes"
+- name: "Create app directory"
+  file:
+    path: ~/app
+    state: directory
 
-- name: "install dependencies."
-  become: true
-  apt:
-    name: ["nodejs", "npm"]
-    state: latest
-    update_cache: yes
+- name: "Unarchive app files"
+  unarchive:
+    src: artifact.tar.gz
+    dest: ~/app
 
-- name: "install pm2"
-  become: true
-  npm:
-    name: pm2
-    global: yes
-    production: yes
-    state: present
-
-- name: "Extract backend files"
-  become: true
+- name: "Installing node dependencies"
   shell: |
-    cd ~/backend
-    tar -C backend -czvf artifact.tar.gz .
+    cd ~/app
+    npm i
 
-- name: "NPM install"
-  become: true
-  command: npm install
-
-- name: "PM2 stop"
-  become: true
-  command: pm2 stop default
-
-- name: "PM2 start"
-  become: true
+- name: "Run backend"
   command: pm2 start npm -- start
+  args:
 
