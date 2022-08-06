@@ -16,4 +16,5 @@
 - name: "Run backend"
   command: pm2 start npm -- start
   args:
+    chdir: ~/app
 
