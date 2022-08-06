@@ -244,15 +244,16 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: amazon/aws-cli
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - run:
           name: Install dependencies
           command: |
-            yum -y install tar gzip
-            apk add nodejs npm
-            apk add --update ansible
+            npm install curl jq tar gzip
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "aws.zip"
+            unzip aws.zip
+            sudo ./aws/install
       - run:
           name: Get backend url
           command: |
@@ -286,9 +287,8 @@ jobs:
           name: Install dependencies
           command: |
             pip install awscli
-            apt update
-            apt install -y tar gzip nodejs npm
-            apk add --update ansible
+            apk add --update tar gzip ansible nodejs npm
+            apk --no-cache add curl
       - run:
           name: Deploy backend
           command: |
