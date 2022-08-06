@@ -244,7 +244,7 @@ jobs:
             then
                 curl --insecure https://kvdb.io/JomZtVRnRb1GpEkSUKYShG/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
-      - destroy-environment
+      - destroy-environment:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
       - revert-migrations:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
@@ -339,7 +339,7 @@ jobs:
             echo "${API_URL}"
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
             cat frontend/.env
-            URL="http://${BACKEND_IP}:3030/api/status"
+            URL="${API_URL}/api/status"
             if curl -s ${URL} | grep "ok"
             then
               return 0
