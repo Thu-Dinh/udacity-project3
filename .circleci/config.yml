@@ -315,9 +315,11 @@ jobs:
           name: Install dependencies
           command: |
             apk add --update curl
-            pip install awscli
             apt update
             apt install nodejs npm
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "aws.zip"
+            unzip aws.zip
+            sudo ./aws/install
       - run:
           name: Get backend url
           command: |
