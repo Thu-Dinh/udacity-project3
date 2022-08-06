@@ -308,18 +308,14 @@ jobs:
 
   smoke-test:
     docker:
-      - image: alpine:latest
+      - image: python:3.7-alpine3.11
     steps:
       - checkout
       - run:
           name: Install dependencies
           command: |
-            apk add --update curl
-            apt update
-            apt install nodejs npm
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "aws.zip"
-            unzip aws.zip
-            sudo ./aws/install
+            apk add --update curl tar gzip
+            pip install awscli
       - run:
           name: Get backend url
           command: |
