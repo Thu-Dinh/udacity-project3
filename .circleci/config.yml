@@ -317,6 +317,15 @@ jobs:
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
+            export TYPEORM_CONNECTION=${TYPEORM_CONNECTION}
+            export TYPEORM_MIGRATIONS_DIR=${TYPEORM_MIGRATIONS_DIR}
+            export TYPEORM_ENTITIES=${TYPEORM_ENTITIES}
+            export TYPEORM_MIGRATIONS=${TYPEORM_MIGRATIONS}
+            export TYPEORM_HOST=${TYPEORM_HOST}
+            export TYPEORM_PORT=${TYPEORM_PORT}
+            export TYPEORM_USERNAME=${TYPEORM_USERNAME}
+            export TYPEORM_PASSWORD=${TYPEORM_PASSWORD}
+            export TYPEORM_DATABASE=${TYPEORM_DATABASE}
       - destroy-environment:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
       - revert-migrations:
@@ -446,5 +455,5 @@ workflows:
           requires: [run-migrations]
       - deploy-backend:
           requires: [run-migrations]
-#      - smoke-test:
-#          requires: [deploy-backend, deploy-frontend]
+      - smoke-test:
+          requires: [deploy-backend, deploy-frontend]
