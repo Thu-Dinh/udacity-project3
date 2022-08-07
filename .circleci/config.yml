@@ -381,7 +381,7 @@ jobs:
             export OldWorkflowID=$(aws cloudformation \
                     list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
                     --no-paginate --output text)
-            curl --insecure https://kvdb.io/JomZtVRnRb1GpEkSUKYShG/old_workflow_id -d "${OLD_WORKFLOW_ID}"
+            curl --insecure https://kvdb.io/JomZtVRnRb1GpEkSUKYShG/old_workflow_id -d "${OldWorkflowID}"
             mkdir -p ~/tmp/workspace
             echo "export OldWorkflowID=\"$OldWorkflowID\"" >> ~/tmp/workspace/vars
             cat ~/tmp/workspace/vars
